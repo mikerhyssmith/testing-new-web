@@ -1,5 +1,5 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import {Button, Box, Meter, Heading} from 'grommet';
+import {Button, Box, Meter, Text, DataTable} from 'grommet';
 
 export const NetworkTester: FunctionComponent = () => {
   const [showInformation, setShowInformation] = useState(false);
@@ -11,22 +11,27 @@ export const NetworkTester: FunctionComponent = () => {
     const connection =
       navigator.connection || navigator.mozConnection || navigator.webkitConnection;
 
-    const updateConnectionStatus: EventListener = e => {
-      setNetworkInformation(e.currentTarget!);
-    };
+    console.log(connection);
 
     if (connection) {
       setNetworkInformation(connection);
-
-      connection.addEventListener('change', updateConnectionStatus);
     }
-
-    return () => connection?.removeEventListener('change', updateConnectionStatus);
   }, []);
 
+  const tableData = networkInformation
+    ? [
+        {name: 'Type', value: networkInformation.type},
+        {name: 'Effective Type', value: networkInformation.effectiveType},
+        {name: 'Downlink', value: networkInformation.downlink, max: 100},
+        {name: 'Downlink Max', value: networkInformation.downlinkMax, max: 100},
+        {name: 'Ping', value: networkInformation.rtt, max: 400},
+        {name: 'Save Data', value: networkInformation.saveData},
+      ]
+    : [];
+
   return (
-    <Box height="100%" width="100%" align="center" justify="center">
-      <Box height="50%" width="50%">
+    <Box height="100%" width="100%" align="center">
+      <Box>
         {!showInformation && (
           <Button
             onClick={handleToggleInformation}
@@ -37,23 +42,48 @@ export const NetworkTester: FunctionComponent = () => {
           />
         )}
         {showInformation && (
-          <Box>
-            <Heading level={4}>
-              {`Network Download Speed: ${networkInformation?.downlink || 0}mbps`}{' '}
-            </Heading>
-            <Meter
-              size="small"
-              values={[
-                {
-                  value: networkInformation?.downlink || 0,
+          <DataTable
+            pad="medium"
+            columns={[
+              {
+                property: 'name',
+                header: <Text>Property</Text>,
+                primary: true,
+              },
+              {
+                property: 'value',
+                header: 'Value',
+                render: datum => {
+                  if (typeof datum.value === 'number') {
+                    return (
+                      <Box pad={{vertical: 'xsmall'}}>
+                        <Meter
+                          values={[
+                            {
+                              value: datum.value,
+                            },
+                          ]}
+                          size="small"
+                          max={datum.max}
+                          type="circle"
+                          aria-label="meter"
+                        />
+                      </Box>
+                    );
+                  } else if (typeof datum.value === 'boolean') {
+                    return (
+                      <Box>
+                        <Text>{datum.value ? '👍' : '👎'}</Text>{' '}
+                      </Box>
+                    );
+                  }
+
+                  return <Box pad={{vertical: 'xsmall'}}>{datum.value}</Box>;
                 },
-              ]}
-              max={100}
-              aria-label="meter"
-              type="circle"
-            />
-            {networkInformation?.rtt}
-          </Box>
+              },
+            ]}
+            data={tableData.filter(({value}) => value)}
+          />
         )}
       </Box>
     </Box>
