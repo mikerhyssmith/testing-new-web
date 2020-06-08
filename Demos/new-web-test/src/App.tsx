@@ -9,7 +9,7 @@ import './App.css';
 
 function App() {
   return (
-    <Grommet theme={theme as any}>
+    <Grommet full theme={theme as any} themeMode="dark">
       <div className="App">
         <NetworkTester />
       </div>
