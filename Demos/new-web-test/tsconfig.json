@@ -16,5 +16,5 @@
     "jsx": "react"
   },
   "include": ["src"],
-  "types": ["./node_modules/network-information-types"]
+  "types": ["./node_modules/network-information-types", "./index.d.ts"]
 }
