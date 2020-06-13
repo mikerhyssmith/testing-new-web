@@ -1,4 +1,6 @@
 {
   "browsers": "chrome",
-  "src": "./specs/**/*.test.ts"
+  "src": "./specs/**/*.test.ts",
+  "tsConfigPath": "./tsconfig.json",
+  "hostname": "192.168.1.101"
 }

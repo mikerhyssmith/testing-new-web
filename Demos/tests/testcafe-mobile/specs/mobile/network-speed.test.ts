@@ -8,7 +8,7 @@ fixture`Network Speed`.page`http://192.168.1.101:3000/network`
     return t.resizeWindow(393, 823);
   });
 
-test('Check internet speed', async t => {
+test.skip('Check internet speed', async t => {
   await t.click(Selector('button').withAttribute('title', 'Test My Network'));
 
   await t.expect(networkTestLogger.count(() => true)).eql(1);
