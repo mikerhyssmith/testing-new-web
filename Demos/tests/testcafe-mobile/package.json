@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "prettier": "prettier-airbnb-config",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "testcafe --speed 0.4",
+    "test:mobile": "testcafe remote"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "testcafe": "^1.8.6",
     "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
+    "prettier": "^2.0.5",
+    "prettier-airbnb-config": "^1.0.0"
   }
 }

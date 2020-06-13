@@ -41,17 +41,17 @@ export const NetworkTester: FunctionComponent = () => {
         {name: 'Downlink', value: networkInformation.downlink, max: 100},
         {name: 'Downlink Max', value: networkInformation.downlinkMax, max: 100},
         {name: 'Ping', value: networkInformation.rtt, max: 400},
-        {name: 'Save Data', value: networkInformation.saveData},
       ]
     : [];
 
   return (
     <Box width="100%" align="center">
       {/* eslint-disable-next-line */}
-      <Heading margin="large">📡 Network Tester 📡</Heading>
+      <Heading responsive>📡 Network Test 📡</Heading>
       <Box>
         {!showInformation && (
           <Button
+            title="Test My Network"
             onClick={handleToggleInformation}
             fill={false}
             size="large"
@@ -103,7 +103,13 @@ export const NetworkTester: FunctionComponent = () => {
               ]}
               data={tableData.filter(({value}) => value !== undefined)}
             />
-            <Button onClick={updateNetworkSpeed} fill={false} size="large" label="Refresh" />
+            <Button
+              title="Refresh"
+              onClick={updateNetworkSpeed}
+              fill={false}
+              size="medium"
+              label="Refresh"
+            />
           </>
         )}
       </Box>
