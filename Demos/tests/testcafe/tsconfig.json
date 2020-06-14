@@ -5,6 +5,7 @@
     "strict": true,
     "esModuleInterop": true,
     "allowJs": true,
+    "resolveJsonModule": true,
     "checkJs": false,
     "inlineSourceMap": true,
     "inlineSources": true,

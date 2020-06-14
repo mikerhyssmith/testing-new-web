@@ -16,6 +16,7 @@ declare module JSX {
     'a-image'?: any;
     'a-light'?: any;
     'a-link'?: any;
+    'a-mixin'?: any;
     'a-obj-model'?: any;
     'a-octahedron'?: any;
     'a-plane'?: any;

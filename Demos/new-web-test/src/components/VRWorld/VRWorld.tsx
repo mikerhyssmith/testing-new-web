@@ -1,22 +1,122 @@
-import React, {FunctionComponent} from 'react';
-import {Box} from 'grommet';
+import React, {FunctionComponent, useEffect} from 'react';
 import 'aframe';
+import {IntersectColourChange} from './IntersectColourChange';
+import {EntityGenerator} from './EntityGenerator';
 
 export const VRWorld: FunctionComponent = () => {
+  useEffect(() => {
+    window.addEventListener('webxr-pose', e => console.log(e));
+    window.addEventListener('webxr-input-pose', e => console.log(e));
+    window.addEventListener('webxr-device', e => console.log(e));
+    window.addEventListener('webxr-device-init', e => console.log(e));
+  });
+
+  useEffect(() => {
+    AFRAME.registerComponent('boxes', {
+      init: function () {
+        var box;
+        var columns = 20;
+        var el = this.el;
+        var rows = 15;
+
+        if (el.sceneEl?.isMobile) {
+          columns = 10;
+          rows = 5;
+        }
+
+        for (let x = columns / -2; x < columns / 2; x++) {
+          for (let y = 0.5; y < rows; y++) {
+            box = document.createElement('a-entity');
+            box.setAttribute('mixin', 'box');
+            box.setAttribute('position', {x: x * 0.6, y: y * 0.6, z: 1.5});
+            el.appendChild(box);
+          }
+        }
+      },
+    });
+
+    AFRAME.registerComponent('shadow-if-mobile', {
+      init: function () {
+        if (!this.el.sceneEl?.isMobile) {
+          this.el.setAttribute('light', {
+            castShadow: true,
+            shadowMapWidth: 2048,
+            shadowMapHeight: 1024,
+          });
+        }
+      },
+    });
+  }, []);
+
   return (
     <div style={{position: 'absolute', height: '100%', width: '100%'}}>
-      <a-scene device-orientation-permission-ui="enabled: false" embedded>
-        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-        <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-        <a-plane
-          position="0 0 -4"
-          rotation="-90 0 0"
-          width="4"
-          height="4"
-          color="#7BC8A4"
-        ></a-plane>
-        <a-sky color="#ECECEC"></a-sky>
+      <a-scene
+        device-orientation-permission-ui="enabled: false"
+        embedded
+        background="color: #212"
+        antialias="true"
+        webxr="referenceSpaceType: local"
+      >
+        <IntersectColourChange />
+        <EntityGenerator />
+        <a-entity position="0 1.6 0" camera look-controls wasd-controls></a-entity>
+        <a-entity
+          id="leftHand"
+          laser-controls="hand: left"
+          raycaster="objects: [mixin='box']"
+        ></a-entity>
+        <a-entity
+          id="rightHand"
+          laser-controls="hand: right"
+          raycaster="objects: [mixin='box']"
+          line="color: #118A7E"
+        ></a-entity>
+
+        <a-light position="0 0.5 1" intensity="0.75"></a-light>
+
+        <a-entity position="0 -1.6 -10">
+          <a-mixin
+            id="box"
+            geometry="primitive: box"
+            material="color: #FAFAFA"
+            rotation="0 0 -35"
+            scale="0.5 0.5 0.5"
+            intersect-color-change
+            shadow="cast: true; receive: false"
+          ></a-mixin>
+          <a-entity boxes></a-entity>
+
+          <a-circle
+            rotation="-90 0 0"
+            radius="20"
+            color="#666"
+            position="0 -0.1 0"
+            shadow="receive: true"
+            roughness="1"
+          ></a-circle>
+
+          <a-light type="point" position="0 10 -30" intensity="0.85" shadow-if-mobile></a-light>
+
+          <a-torus
+            radius="20"
+            arc="190"
+            rotation="0 90 0"
+            animation="property: rotation; to: 0 450 0; loop: true; dur: 16000; easing: linear"
+          ></a-torus>
+          <a-torus
+            radius="20"
+            arc="190"
+            rotation="0 45 0"
+            animation="property: rotation; to: 0 405 0; loop: true; dur: 16000; easing: linear"
+          ></a-torus>
+          <a-torus
+            radius="20"
+            arc="190"
+            rotation="0 135 0"
+            animation="property: rotation; to: 0 495 0; dir: reverse; loop: true; dur: 16000; easing: linear"
+          ></a-torus>
+          <a-torus radius="20" arc="360" rotation="-90 0 0"></a-torus>
+        </a-entity>
       </a-scene>
     </div>
   );
