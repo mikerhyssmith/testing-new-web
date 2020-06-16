@@ -29,7 +29,7 @@ export const IntersectColourChange: FunctionComponent = () => {
         });
       },
     });
-  }, [isMouseEnter]);
+  }, []);
 
   return null;
 };
