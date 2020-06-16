@@ -3,7 +3,7 @@ import {Selector} from 'testcafe';
 fixture`VR Scene`.page`http://192.168.1.101:3000/VR`.clientScripts({path: './XRPolyfill.js'});
 
 //
-test.only('VR Operations', async t => {
+test.skip('VR Operations', async t => {
   await t.click('.a-enter-vr-button');
 
   await t.eval(() => window.dispatchEvent(new CustomEvent('webxr-startup', {})));

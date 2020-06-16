@@ -5,10 +5,10 @@ const networkTestLogger = RequestLogger('http://eu.httpbin.org/stream-bytes/5000
 fixture`Network Speed`.page`http://192.168.1.101:3000/network`
   .requestHooks(networkTestLogger)
   .beforeEach(async t => {
-    return t.resizeWindow(393, 823);
+    // return t.resizeWindow(393, 823);
   });
 
-test.skip('Check internet speed', async t => {
+test('Check internet speed', async t => {
   await t.click(Selector('button').withAttribute('title', 'Test My Network'));
 
   await t.expect(networkTestLogger.count(() => true)).eql(1);

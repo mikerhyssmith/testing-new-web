@@ -8,7 +8,6 @@ import {NetworkTester} from './components/NetworkTester/NetworkTester';
 import {VRWorld} from './components/VRWorld/VRWorld';
 
 import './App.css';
-import {VRWorldOld} from './components/VRWorld/VRWorldOld';
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
           <Switch>
             <Route path="/VR">
               <VRWorld />
-              {/* <VRWorldOld /> */}
             </Route>
             <Route path="/network">
               <NetworkTester />

@@ -9,15 +9,15 @@ test('Check initial view', async t => {
   await t.takeElementScreenshot(Selector('canvas'), './canvas/canvas.png');
 
   looksSame(
-    '/home/mike/Github/BristolJS/Demos/tests/testcafe-mobile/screenshots/canvas/master/canvas.png',
-    '/home/mike/Github/BristolJS/Demos/tests/testcafe-mobile/screenshots/canvas/canvas.png',
+    '/home/mike/Github/BristolJS/Demos/tests/testcafe/screenshots/canvas/expected/canvas.png',
+    '/home/mike/Github/BristolJS/Demos/tests/testcafe/screenshots/canvas/canvas.png',
     async (_, result) => {
       await t.expect(result.equal).eql(true);
     }
   );
 });
 
-test('Check initial view (with Percy)', async t => {
+test.skip('Check initial view (with Percy)', async t => {
   // Need to try this with ngrok
   await percySnapshot(t, 'rendered a 3D Scene', {enableJavaScript: true});
 });
