@@ -1,5 +1,5 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
-import {Button, Box, Meter, Text, DataTable, Heading} from 'grommet';
+import React, {FunctionComponent, useState} from 'react';
+import {Box, Heading} from 'grommet';
 import {Bubble} from './Bubble';
 
 const initialBubbles: boolean[] = Array(100).fill(true);
@@ -8,15 +8,19 @@ export const BubblePopper: FunctionComponent = () => {
   const [bubbles, setBubbles] = useState(initialBubbles);
 
   const handlePop = (index: number) => {
-    const newBubbles = [...bubbles];
-    newBubbles[index] = false;
+    if (bubbles[index] === true) {
+      const newBubbles = [...bubbles];
+      newBubbles[index] = false;
 
-    setBubbles(newBubbles);
+      setBubbles(newBubbles);
+      window.navigator.vibrate(100);
+    }
   };
 
   return (
     <Box pad="small" fill width="100%" align="center">
-      <Heading>🧼 Bubblewrappr 🧼</Heading>
+      {/* eslint-disable-next-line */}
+      <Heading responsive>🧼 Bubblerappr 🧼</Heading>
 
       <div className="BubbleWrap">
         {bubbles.map((isPoppable, index) => (

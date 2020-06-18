@@ -29,6 +29,7 @@ export const IntersectColourChange: FunctionComponent = () => {
         });
       },
     });
+    // eslint-disable-next-line
   }, []);
 
   return null;

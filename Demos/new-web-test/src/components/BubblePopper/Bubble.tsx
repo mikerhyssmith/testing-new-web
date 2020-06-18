@@ -1,6 +1,5 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
-import {Button, Box, Meter, Text, DataTable, Heading} from 'grommet';
-
+import {Box} from 'grommet';
+import React, {FunctionComponent} from 'react';
 import './Bubble.scss';
 
 export interface IBubbleProps {

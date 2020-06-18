@@ -1,10 +1,12 @@
 // Inspired by https://www.youtube.com/watch?v=_K6ZcrK7xxY
 
 .BubbleWrap {
-  background-color: rgba(225, 238, 255, 0.3);
+  background-color: rgba(225, 220, 255, 0.226);
   border-radius: 0.1em;
   padding: 0.2em;
   height: 100%;
+  outline: none;
+  user-select: none;
 
   display: grid;
   gap: 1em;
