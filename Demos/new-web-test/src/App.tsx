@@ -8,6 +8,7 @@ import {NetworkTester} from './components/NetworkTester/NetworkTester';
 import {VRWorld} from './components/VRWorld/VRWorld';
 
 import './App.css';
+import {BubblePopper} from './components/BubblePopper/BubblePopper';
 
 function App() {
   return (
@@ -21,9 +22,13 @@ function App() {
             <Route path="/network">
               <NetworkTester />
             </Route>
+            <Route path="/bubbles">
+              <BubblePopper />
+            </Route>
             <Route path="/">
               <Link to="/VR">VR Demo</Link>
               <Link to="/network">Network Tester</Link>
+              <Link to="/bubbles">Bubbles</Link>
             </Route>
           </Switch>
         </div>
