@@ -21,15 +21,15 @@ export const IntersectColourChange: FunctionComponent = () => {
         el.addEventListener('mouseenter', function () {
           el.setAttribute(
             'animation',
-            'property: scale; to: 1.75 1.75 1.75; dur: 800; easing: linear;'
+            'property: scale; to: 1.5 1.5 1.5; dur: 400; easing: linear;'
           );
           el.setAttribute(
             'animation__2',
-            'property: material.opacity; to: 0; dur: 100; easing: linear; delay: 400;'
+            'property: material.opacity; to: 0; dur: 100; easing: linear; delay: 300;'
           );
           el.setAttribute(
             'animation__3',
-            'property: scale; to: 0; dur: 100; easing: linear; delay: 500;'
+            'property: scale; to: 0 0 0; dur: 100; easing: linear; delay: 300;'
           );
           setIsMouseEnter(true);
         });

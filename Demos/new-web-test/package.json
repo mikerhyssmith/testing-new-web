@@ -13,6 +13,7 @@
     "@types/react-dom": "^16.9.8",
     "aframe": "^1.0.4",
     "aframe-react": "^4.4.0",
+    "aframe-text-geometry-component": "^0.5.1",
     "grommet": "^2.13.0",
     "network-speed": "^2.0.6",
     "node-sass": "^4.14.1",

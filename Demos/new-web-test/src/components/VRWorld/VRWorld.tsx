@@ -1,5 +1,6 @@
 import React, {FunctionComponent, useEffect} from 'react';
 import 'aframe';
+import 'aframe-text-geometry-component';
 import {IntersectColourChange} from './IntersectColourChange';
 import {EntityGenerator} from './EntityGenerator';
 
@@ -29,7 +30,8 @@ export const VRWorld: FunctionComponent = () => {
             box = document.createElement('a-entity');
             box.setAttribute('mixin', 'bubble');
             box.setAttribute('shader', 'bubble-shader');
-            box.setAttribute('position', {x: x * 1, y: y * 1, z: 1.5});
+            console.log(x, y);
+            box.setAttribute('position', {x: x * 1.1, y: y * 1.1, z: 1.5});
             el.appendChild(box);
           }
         }
@@ -58,9 +60,25 @@ export const VRWorld: FunctionComponent = () => {
         antialias="true"
         webxr="referenceSpaceType: local"
       >
+        <a-assets>
+          <img
+            id="pink"
+            src="https://img.gs/bbdkhfbzkk/stretch/http://i.imgur.com/1hyyIUi.jpg"
+            crossOrigin="anonymous"
+          />
+          <a-asset-item id="font" src="/font.json"></a-asset-item>
+        </a-assets>
         <IntersectColourChange />
         <EntityGenerator />
-        <a-entity position="0 1.6 0" camera look-controls wasd-controls></a-entity>
+
+        <a-entity
+          position="-3.5 6 -6"
+          text-geometry="value: Bubblerappr; font: #font; bevelEnabled: true; bevelSize: 0.05; bevelThickness: 0.05; curveSegments: 12; size: 1; height: 0;"
+          material="color:lavenderblush; metalness:1; roughness: 0; sphericalEnvMap: #pink;"
+        ></a-entity>
+
+        <a-entity position="0 1.6 0" look-controls wasd-controls></a-entity>
+        <a-camera position="0 3 0"></a-camera>
         <a-entity
           id="leftHand"
           laser-controls="hand: left"
@@ -78,7 +96,7 @@ export const VRWorld: FunctionComponent = () => {
         <a-entity position="0 -1.6 -10">
           <a-mixin
             id="bubble"
-            material="side: double; color: #1addff; transparent: true; opacity: 0.4"
+            material="side: double; color: #1addff; transparent: true; opacity: 0.4; metalness:0.1;"
             geometry="primitive:sphere;radius:0.5"
             radius="0.5"
             intersect-color-change
