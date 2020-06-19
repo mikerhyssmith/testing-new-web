@@ -2,6 +2,8 @@ import React, {FunctionComponent, useEffect} from 'react';
 import 'aframe';
 import {IntersectColourChange} from './IntersectColourChange';
 import {EntityGenerator} from './EntityGenerator';
+// @ts-nocheck
+import './bubble.js';
 
 export const VRWorld: FunctionComponent = () => {
   useEffect(() => {
@@ -12,12 +14,78 @@ export const VRWorld: FunctionComponent = () => {
   });
 
   useEffect(() => {
+    AFRAME.registerShader('bubble-shader', {
+      schema: {
+        color: {type: 'color', is: 'uniform', default: '#1addff'},
+        opacity: {type: 'number', is: 'uniform', default: 0.3},
+        emissive: {default: '#000'},
+      },
+      uniforms: {
+        mRefractionRatio: {type: 'f', value: 1.02},
+        mFresnelBias: {type: 'f', value: 0.1},
+        mFresnelPower: {type: 'f', value: 2.0},
+        mFresnelScale: {type: 'f', value: 1.0},
+        tCube: {type: 't', value: null},
+      },
+
+      vertexShader: [
+        'uniform float mRefractionRatio;',
+        'uniform float mFresnelBias;',
+        'uniform float mFresnelScale;',
+        'uniform float mFresnelPower;',
+
+        'varying vec3 vReflect;',
+        'varying vec3 vRefract[3];',
+        'varying float vReflectionFactor;',
+
+        'void main() {',
+
+        'vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );',
+        'vec4 worldPosition = modelMatrix * vec4( position, 1.0 );',
+
+        'vec3 worldNormal = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );',
+
+        'vec3 I = worldPosition.xyz - cameraPosition;',
+
+        'vReflect = reflect( I, worldNormal );',
+        'vRefract[0] = refract( normalize( I ), worldNormal, mRefractionRatio );',
+        'vRefract[1] = refract( normalize( I ), worldNormal, mRefractionRatio * 0.99 );',
+        'vRefract[2] = refract( normalize( I ), worldNormal, mRefractionRatio * 0.98 );',
+        'vReflectionFactor = mFresnelBias + mFresnelScale * pow( 1.0 + dot( normalize( I ), worldNormal ), mFresnelPower );',
+
+        'gl_Position = projectionMatrix * mvPosition;',
+
+        '}',
+      ].join('\n'),
+
+      fragmentShader: [
+        'uniform samplerCube tCube;',
+
+        'varying vec3 vReflect;',
+        'varying vec3 vRefract[3];',
+        'varying float vReflectionFactor;',
+
+        'void main() {',
+
+        'vec4 reflectedColor = textureCube( tCube, vec3( -vReflect.x, vReflect.yz ) );',
+        'vec4 refractedColor = vec4( 1.0 );',
+
+        'refractedColor.r = textureCube( tCube, vec3( -vRefract[0].x, vRefract[0].yz ) ).r;',
+        'refractedColor.g = textureCube( tCube, vec3( -vRefract[1].x, vRefract[1].yz ) ).g;',
+        'refractedColor.b = textureCube( tCube, vec3( -vRefract[2].x, vRefract[2].yz ) ).b;',
+
+        'gl_FragColor = mix( refractedColor, reflectedColor, clamp( vReflectionFactor, 0.0, 1.0 ) );',
+
+        '}',
+      ].join('\n'),
+    });
+
     AFRAME.registerComponent('boxes', {
       init: function () {
         var box;
-        var columns = 20;
+        var columns = 10;
         var el = this.el;
-        var rows = 15;
+        var rows = 7;
 
         if (el.sceneEl?.isMobile) {
           columns = 10;
@@ -27,8 +95,9 @@ export const VRWorld: FunctionComponent = () => {
         for (let x = columns / -2; x < columns / 2; x++) {
           for (let y = 0.5; y < rows; y++) {
             box = document.createElement('a-entity');
-            box.setAttribute('mixin', 'box');
-            box.setAttribute('position', {x: x * 0.6, y: y * 0.6, z: 1.5});
+            box.setAttribute('mixin', 'bubble');
+            box.setAttribute('shader', 'bubble-shader');
+            box.setAttribute('position', {x: x * 1, y: y * 1, z: 1.5});
             el.appendChild(box);
           }
         }
@@ -63,12 +132,12 @@ export const VRWorld: FunctionComponent = () => {
         <a-entity
           id="leftHand"
           laser-controls="hand: left"
-          raycaster="objects: [mixin='box']"
+          raycaster="objects: [mixin='bubble']"
         ></a-entity>
         <a-entity
           id="rightHand"
           laser-controls="hand: right"
-          raycaster="objects: [mixin='box']"
+          raycaster="objects: [mixin='bubble']"
           line="color: #118A7E"
         ></a-entity>
 
@@ -76,15 +145,18 @@ export const VRWorld: FunctionComponent = () => {
 
         <a-entity position="0 -1.6 -10">
           <a-mixin
-            id="box"
-            geometry="primitive: box"
-            material="color: #FAFAFA"
+            id="bubble"
+            geometry="primitive: sphere"
+            radius="1"
+            opacity="0.4"
             rotation="0 0 -35"
             scale="0.5 0.5 0.5"
             intersect-color-change
             shadow="cast: true; receive: false"
           ></a-mixin>
-          <a-entity boxes></a-entity>
+          {/* <a-entity boxes></a-entity> */}
+
+          <a-entity bubble id="bubblex"></a-entity>
 
           <a-circle
             rotation="-90 0 0"
