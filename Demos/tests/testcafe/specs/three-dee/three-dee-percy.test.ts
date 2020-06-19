@@ -1,4 +1,3 @@
-import {Selector} from 'testcafe';
 // @ts-ignore
 import percySnapshot from '@percy/testcafe';
 

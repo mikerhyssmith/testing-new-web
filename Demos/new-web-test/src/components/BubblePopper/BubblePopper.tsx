@@ -2,7 +2,7 @@ import React, {FunctionComponent, useState} from 'react';
 import {Box, Heading} from 'grommet';
 import {Bubble} from './Bubble';
 
-const initialBubbles: boolean[] = Array(100).fill(true);
+const initialBubbles: boolean[] = Array(99).fill(true);
 
 export const BubblePopper: FunctionComponent = () => {
   const [bubbles, setBubbles] = useState(initialBubbles);
@@ -19,8 +19,9 @@ export const BubblePopper: FunctionComponent = () => {
 
   return (
     <Box pad="small" fill width="100%" align="center">
-      {/* eslint-disable-next-line */}
-      <Heading responsive>🧼 Bubblerappr 🧼</Heading>
+      <Heading style={{color: '#CD6ABA', fontFamily: 'Pacifico, cursive'}} responsive>
+        🧼 Bubblerappr 🧼
+      </Heading>
 
       <div className="BubbleWrap">
         {bubbles.map((isPoppable, index) => (

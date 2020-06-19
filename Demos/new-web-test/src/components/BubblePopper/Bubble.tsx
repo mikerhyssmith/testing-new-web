@@ -10,8 +10,8 @@ export interface IBubbleProps {
 
 export const Bubble: FunctionComponent<IBubbleProps> = ({id, isPoppable, onPop}) => {
   return (
-    <Box width="100%" align="center">
+    <div className="BubbleContainer">
       <div className={`Bubble ${isPoppable ? '' : 'popped'}`} onClick={() => onPop(id)} />
-    </Box>
+    </div>
   );
 };

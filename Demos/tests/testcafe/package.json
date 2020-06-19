@@ -5,10 +5,11 @@
   "main": "index.js",
   "prettier": "prettier-airbnb-config",
   "scripts": {
-    "test": "testcafe --speed 0.4",
-    "test:mobile": "testcafe remote specs/mobile/network-speed.test.ts --qr-code --speed 0.4",
+    "test": "testcafe  specs/mobile/bubble-wrap.test.ts --speed 0.4",
+    "test:mobile": "testcafe remote specs/mobile/bubble-wrap.test.ts --qr-code --speed 0.4",
     "test:3d": "testcafe specs/three-dee/three-dee.test.ts",
-    "test:percy": "percy exec -h 192.168.1.101 -- testcafe specs/three-dee/three-dee-percy.test.ts"
+    "test:percy": "percy exec -h 192.168.1.101 -- testcafe specs/three-dee/three-dee-percy.test.ts",
+    "test:vr": "testcafe specs/VirtualReality/vr.test.ts --speed 0.4"
   },
   "author": "",
   "license": "ISC",
