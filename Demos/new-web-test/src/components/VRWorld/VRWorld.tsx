@@ -84,7 +84,9 @@ export const VRWorld: FunctionComponent = () => {
         ></a-entity>
 
         <a-entity position="0 1.6 0" look-controls wasd-controls></a-entity>
-        <a-camera position="0 3 0">{!inVR && <a-cursor></a-cursor>}</a-camera>
+        <a-camera position="0 3 0">
+          <a-cursor mouseCursorStylesEnabled={!inVR}></a-cursor>
+        </a-camera>
         <a-entity
           id="leftHand"
           laser-controls="hand: left"

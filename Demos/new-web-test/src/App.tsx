@@ -26,9 +26,9 @@ function App() {
               <BubblePopper />
             </Route>
             <Route path="/">
-              <Link to="/VR">VR Demo</Link>
-              <Link to="/network">Network Tester</Link>
-              <Link to="/bubbles">Bubbles</Link>
+              <Link to="VR">VR Demo</Link>
+              <Link to="network">Network Tester</Link>
+              <Link to="bubbles">Bubbles</Link>
             </Route>
           </Switch>
         </div>
