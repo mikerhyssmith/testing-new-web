@@ -12,7 +12,7 @@ import {BubblePopper} from './components/BubblePopper/BubblePopper';
 
 function App() {
   return (
-    <Router>
+    <Router basename="testing-new-web">
       <Grommet full theme={theme as any} themeMode="dark">
         <div className="App">
           <Switch>
@@ -26,9 +26,9 @@ function App() {
               <BubblePopper />
             </Route>
             <Route path="/">
-              <Link to="VR">VR Demo</Link>
-              <Link to="network">Network Tester</Link>
-              <Link to="bubbles">Bubbles</Link>
+              <Link to="/VR">VR Demo</Link>
+              <Link to="/network">Network Tester</Link>
+              <Link to="/bubbles">Bubbles</Link>
             </Route>
           </Switch>
         </div>
