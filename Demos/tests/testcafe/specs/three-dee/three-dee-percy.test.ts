@@ -1,13 +1,12 @@
-// @ts-ignore
-import percySnapshot from '@percy/testcafe';
+import percy from 'percy';
+import {Selector} from 'testcafe';
 
-fixture`3D Scene`.page`http://192.168.1.102:3000/VR`;
+fixture`3D Scene`.page`http://192.168.1.102:3000/#/VR`.before(async t => {});
 
 test('Check initial view (with Percy)', async t => {
-  await t.wait(20000);
+  await t.resizeWindow(1920, 1080);
 
-  await t.click('.a-enter-vr-button');
-  // Need to try this with ngrok
-  console.log('snapshot');
-  await percySnapshot(t, 'rendered a 3D Scene', {enableJavaScript: true});
+  await t.wait(15000);
+
+  await t.takeElementScreenshot(Selector('canvas'), './canvas/canvas.png');
 });

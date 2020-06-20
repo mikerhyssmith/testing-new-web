@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 
-describe("Peerless", () => {
+describe.skip("Peerless", () => {
   it("should spin up two browser windows", async () => {
     const browserHost = await puppeteer.launch({ headless: false });
     const page = await browserHost.newPage();

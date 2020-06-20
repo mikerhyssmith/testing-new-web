@@ -1,9 +1,11 @@
 import {Selector} from 'testcafe';
 import looksSame from 'looks-same';
 
-fixture`3D Scene`.page`http://192.168.1.101:3000/VR`;
+fixture`3D Scene`.page`https://mikerhyssmith.github.io/testing-new-web/#/VR`;
 
 test('Check initial view', async t => {
+  await t.wait(15000);
+
   await t.takeElementScreenshot(Selector('canvas'), './canvas/canvas.png');
 
   looksSame(
