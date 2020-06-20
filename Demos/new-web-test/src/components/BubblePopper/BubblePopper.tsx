@@ -20,7 +20,13 @@ export const BubblePopper: FunctionComponent = () => {
   return (
     <Box pad="small" fill width="100%" align="center">
       <Heading style={{color: '#CD6ABA', fontFamily: 'Pacifico, cursive'}} responsive>
-        🧼 Bubblerappr 🧼
+        <span role="img" aria-label="Bubblerappr">
+          🧼
+        </span>{' '}
+        Bubblerappr{' '}
+        <span role="img" aria-label="Bubblerappr">
+          🧼
+        </span>
       </Heading>
 
       <div className="BubbleWrap">

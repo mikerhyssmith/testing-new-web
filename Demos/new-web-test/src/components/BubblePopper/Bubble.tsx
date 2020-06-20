@@ -1,4 +1,3 @@
-import {Box} from 'grommet';
 import React, {FunctionComponent} from 'react';
 import './Bubble.scss';
 

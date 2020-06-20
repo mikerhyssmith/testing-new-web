@@ -61,11 +61,7 @@ export const VRWorld: FunctionComponent = () => {
         webxr="referenceSpaceType: local"
       >
         <a-assets>
-          <img
-            id="pink"
-            src="https://img.gs/bbdkhfbzkk/stretch/http://i.imgur.com/1hyyIUi.jpg"
-            crossOrigin="anonymous"
-          />
+          <img alt="font-assets" id="pink" src="/font-color.jpg" crossOrigin="anonymous" />
           <a-asset-item id="font" src="/font.json"></a-asset-item>
         </a-assets>
         <IntersectColourChange />
@@ -78,7 +74,9 @@ export const VRWorld: FunctionComponent = () => {
         ></a-entity>
 
         <a-entity position="0 1.6 0" look-controls wasd-controls></a-entity>
-        <a-camera position="0 3 0"></a-camera>
+        <a-camera position="0 3 0">
+          <a-cursor></a-cursor>
+        </a-camera>
         <a-entity
           id="leftHand"
           laser-controls="hand: left"
