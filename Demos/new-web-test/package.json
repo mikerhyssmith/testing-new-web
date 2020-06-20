@@ -2,6 +2,7 @@
   "name": "new-web-test",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "prettier": "prettier-airbnb-config",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
