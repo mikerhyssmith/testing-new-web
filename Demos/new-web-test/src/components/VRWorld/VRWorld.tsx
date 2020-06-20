@@ -1,15 +1,25 @@
-import React, {FunctionComponent, useEffect} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 import 'aframe';
 import 'aframe-text-geometry-component';
 import {IntersectColourChange} from './IntersectColourChange';
 import {EntityGenerator} from './EntityGenerator';
 
 export const VRWorld: FunctionComponent = () => {
+  const [inVR, setInVR] = useState(false);
+
   useEffect(() => {
     window.addEventListener('webxr-pose', e => console.log(e));
     window.addEventListener('webxr-input-pose', e => console.log(e));
     window.addEventListener('webxr-device', e => console.log(e));
     window.addEventListener('webxr-device-init', e => console.log(e));
+
+    document.querySelector('a-scene').addEventListener('enter-vr', function () {
+      setInVR(true);
+    });
+
+    document.querySelector('a-scene').addEventListener('enter-vr', function () {
+      setInVR(false);
+    });
   });
 
   useEffect(() => {
@@ -61,8 +71,8 @@ export const VRWorld: FunctionComponent = () => {
         webxr="referenceSpaceType: local"
       >
         <a-assets>
-          <img alt="font-assets" id="pink" src="/font-color.jpg" crossOrigin="anonymous" />
-          <a-asset-item id="font" src="/font.json"></a-asset-item>
+          <img alt="font-assets" id="pink" src="font-color.jpg" crossOrigin="anonymous" />
+          <a-asset-item id="font" src="font.json"></a-asset-item>
         </a-assets>
         <IntersectColourChange />
         <EntityGenerator />
@@ -74,9 +84,7 @@ export const VRWorld: FunctionComponent = () => {
         ></a-entity>
 
         <a-entity position="0 1.6 0" look-controls wasd-controls></a-entity>
-        <a-camera position="0 3 0">
-          <a-cursor></a-cursor>
-        </a-camera>
+        <a-camera position="0 3 0">{!inVR && <a-cursor></a-cursor>}</a-camera>
         <a-entity
           id="leftHand"
           laser-controls="hand: left"
