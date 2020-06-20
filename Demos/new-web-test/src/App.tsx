@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Grommet} from 'grommet';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 import {theme} from './theme';
 import {NetworkTester} from './components/NetworkTester/NetworkTester';
@@ -12,7 +12,7 @@ import {BubblePopper} from './components/BubblePopper/BubblePopper';
 
 function App() {
   return (
-    <Router basename="testing-new-web">
+    <Router>
       <Grommet full theme={theme as any} themeMode="dark">
         <div className="App">
           <Switch>
