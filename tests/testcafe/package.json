@@ -1,0 +1,29 @@
+{
+  "name": "testcafe-mobile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "prettier": "prettier-airbnb-config",
+  "scripts": {
+    "test": "testcafe  specs/mobile/bubble-wrap.test.ts --speed 0.4",
+    "test:mobile": "testcafe remote specs/mobile/bubble-wrap.test.ts --qr-code --speed 0.4",
+    "test:3d": "testcafe specs/three-dee/three-dee.test.ts ",
+    "test:percy": "testcafe specs/three-dee/three-dee-percy.test.ts && rm -rf /home/mike/Github/BristolJS/Demos/tests/testcafe/screenshots/canvas/thumbnails && npx percy upload /home/mike/Github/BristolJS/Demos/tests/testcafe/screenshots/canvas",
+    "test:vr": "testcafe specs/VirtualReality/vr.test.ts --speed 0.4"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "testcafe": "^1.8.6",
+    "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
+    "@percy/testcafe": "^0.2.0",
+    "@types/looks-same": "^4.1.0",
+    "looks-same": "^7.2.3",
+    "percy": "^0.26.9",
+    "prettier": "^2.0.5",
+    "prettier-airbnb-config": "^1.0.0"
+  }
+}

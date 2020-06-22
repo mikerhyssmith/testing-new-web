@@ -1,5 +1,0 @@
-{
-  "browsers": "chrome:userProfile",
-  "src": "./specs/**/*.test.ts",
-  "tsConfigPath": "./tsconfig.json"
-}

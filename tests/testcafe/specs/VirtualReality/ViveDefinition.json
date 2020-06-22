@@ -1,0 +1,29 @@
+{
+  "id": "HTC Vive",
+  "name": "HTC Vive",
+  "modes": ["inline", "immersive-vr"],
+  "headset": {
+    "hasPosition": true,
+    "hasRotation": true
+  },
+  "controllers": [
+    {
+      "id": "OpenVR Gamepad",
+      "buttonNum": 3,
+      "primaryButtonIndex": 0,
+      "primarySqueezeButtonIndex": 1,
+      "hasPosition": true,
+      "hasRotation": true,
+      "hasSqueezeButton": true
+    },
+    {
+      "id": "OpenVR Gamepad",
+      "buttonNum": 3,
+      "primaryButtonIndex": 0,
+      "primarySqueezeButtonIndex": 1,
+      "hasPosition": true,
+      "hasRotation": true,
+      "hasSqueezeButton": true
+    }
+  ]
+}
