@@ -9,6 +9,7 @@ import {VRWorld} from './components/VRWorld/VRWorld';
 
 import './App.css';
 import {BubblePopper} from './components/BubblePopper/BubblePopper';
+import {ThreeDee} from './components/VRWorld/ThreeDee';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
             <Route path="/VR">
               <VRWorld />
             </Route>
+            <Route path="/ThreeDee">
+              <ThreeDee />
+            </Route>
             <Route path="/network">
               <NetworkTester />
             </Route>
@@ -27,6 +31,7 @@ function App() {
             </Route>
             <Route path="/">
               <Link to="/VR">VR Demo</Link>
+              <Link to="/ThreeDee">3D Demo</Link>
               <Link to="/network">Network Tester</Link>
               <Link to="/bubbles">Bubbles</Link>
             </Route>

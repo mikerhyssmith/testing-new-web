@@ -9,7 +9,7 @@
     "test:mobile": "testcafe remote specs/mobile/bubble-wrap.test.ts --qr-code --speed 0.4",
     "test:3d": "testcafe specs/three-dee/three-dee.test.ts ",
     "test:percy": "testcafe specs/three-dee/three-dee-percy.test.ts && rm -rf /home/mike/Github/BristolJS/Demos/tests/testcafe/screenshots/canvas/thumbnails && npx percy upload /home/mike/Github/BristolJS/Demos/tests/testcafe/screenshots/canvas",
-    "test:vr": "testcafe specs/VirtualReality/vr.test.ts --speed 0.4"
+    "test:vr": "testcafe specs/VirtualReality/vr.test.ts --speed 0.2"
   },
   "author": "",
   "license": "ISC",

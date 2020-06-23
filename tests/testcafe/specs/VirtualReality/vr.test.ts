@@ -1,6 +1,8 @@
 import {Selector} from 'testcafe';
 
-fixture`VR Scene`.page`http://192.168.1.102:3000/#/VR`.clientScripts({path: './XRPolyfill.js'});
+fixture`VR Scene`.page`https://mikerhyssmith.github.io/testing-new-web/#/VR`.clientScripts({
+  path: './XRPolyfill.js',
+});
 
 //
 test('VR Operations', async t => {

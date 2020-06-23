@@ -1,6 +1,6 @@
 import {Selector} from 'testcafe';
 
-fixture`Bubble Pop`.page`http://192.168.1.102:3000/#/bubbles`;
+fixture`Bubble Pop`.page`https://mikerhyssmith.github.io/testing-new-web/#/bubbles`;
 
 test('Check popping bubbles', async t => {
   await t.expect(Selector('.Bubble').count).eql(99);
